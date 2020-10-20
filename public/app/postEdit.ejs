@@ -1,6 +1,6 @@
 <h1>Edit <%= post.title %></h1>
 <div>
-	<form name="form1" action="/app/posts/:id/edit" method="GET">
+	<form name="form1" action="/app/posts" method="POST">
 		<div>
 			<label>Title<br>
 				<input type="text" name="title" value="<%= post.title %>">
@@ -9,6 +9,11 @@
 		<div>
 			<label>Body<br>
 				<textarea name="body" id="" cols="30" rows="10" ><%= post.body %></textarea>
+			</label>
+		</div>
+		<div>
+			<label>Post #<br>
+				<input type = "text" name="id" value="<%= post._id %>" readonly>
 			</label>
 		</div>
 		<input type="submit" value ="Save">

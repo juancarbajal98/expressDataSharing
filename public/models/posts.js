@@ -44,11 +44,12 @@ const Post = {
         result = posts.filter(post => post._id === Number(id));
         return result[0];
     },
-    update: (id, content) => {
-        console.log('blog post not updated: ',  posts.filter(post => post._id === Number(id))[0]);
-        posts.filter(post => post._id === Number(id))[0].title = content.title;
-        posts.filter(post => post._id === Number(id))[0].body = content.body;
-        console.log('blog post updated: ',  posts.filter(post => post._id === Number(id))[0]);
+    update: (content) => {
+        console.log('blog post not updated: ',  posts.filter(post => post._id === Number(content._id))[0]);
+        posts.filter(post => post._id === Number(content._id))[0].title = content.title;
+        posts.filter(post => post._id === Number(content._id))[0].body = content.body;
+        console.log('blog post updated: ',  posts.filter(post => post._id === Number(content._id))[0]);
+        return posts;
     }
 };
 

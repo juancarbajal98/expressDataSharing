@@ -76,18 +76,29 @@ app.get('/', (req,res) => {
     app.get('/app/posts', (req,res) => {
         const posts = Post.find();
         res.render('app/posts', {posts});
-    })
+    });
+
+    // rendering posts page after edit 
+    // first goes through middleware that compares id's
+    app.post('/app/posts', (req, res) => {
+        // should be printing out updated blog
+        console.log(req.body);
+        var newBlog = { 
+            title: req.body.title,
+            body: req.body.body,
+            _id: req.body.id,
+        }
+        const posts = Post.update(newBlog);
+        res.render('app/posts', {posts});
+    });
 
     // rendering a post based on id param using imported Post method
     app.get('/app/posts/:id', (req,res) => {
         const post = Post.findById(req.params.id);
         res.render('app/postById', {post});
     });
-
-    // rendering a post to edit 
-    // first goes through middleware that compares id's 
+ 
     app.get('/app/posts/:id/edit',isAuthor, (req, res) => {
-        console.log(req.body.title);
         res.render('app/postEdit');
-    })
+    });
 app.listen(port, () => console.log(`Example app listening on port ${port}`));
