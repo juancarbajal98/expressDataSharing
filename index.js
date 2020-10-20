@@ -99,6 +99,16 @@ app.get('/', (req,res) => {
     });
  
     app.get('/app/posts/:id/edit',isAuthor, (req, res) => {
-        res.render('app/postEdit');
+        // on the user initially reaching (getting) the edit page
+        // we set the modal detector to false and swap on button click
+        // which triggers the post below
+        var show_modal = false;
+        res.render('app/postEdit', {show_modal});
+    });
+
+    app.post('/app/posts/:id/edit',isAuthor, (req, res) => {
+        console.log(req.body);
+        var show_modal = !!req.body.modal;
+        res.render('app/postEdit', {show_modal});
     });
 app.listen(port, () => console.log(`Example app listening on port ${port}`));

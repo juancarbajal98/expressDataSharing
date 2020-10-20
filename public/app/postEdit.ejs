@@ -1,4 +1,9 @@
 <h1>Edit <%= post.title %></h1>
+<% if (show_modal || show_modal !== undefined) { %>
+    <div id="modal" style="display: block">
+        MODAL WAS CLICKED
+    </div>
+<% } %>
 <div>
 	<form name="form1" action="/app/posts" method="POST">
 		<div>
@@ -18,6 +23,10 @@
 		</div>
 		<input type="submit" value ="Save">
 	</form>
+	<!-- the # suffix in the action property-->
+	<form action="#" method="POST">
+		<button style="position:absolute; left: 185px;" name ="modal" value="open">Delete Post</button>
+	</form>
 </div>
 
-<a href="/app/posts">Back</a>
+<button href="/app/posts">Back</button>
