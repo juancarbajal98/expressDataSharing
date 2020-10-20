@@ -33,6 +33,7 @@ const posts = [
 object we export - has two defined methods :
     1. find: returns all posts
     2. findById: returns post from specified id
+    3. update: updates the content of a post
 */
 const Post = {
     find: () => {
@@ -42,6 +43,12 @@ const Post = {
         // utilize .filter() method to find by id
         result = posts.filter(post => post._id === Number(id));
         return result[0];
+    },
+    update: (id, content) => {
+        console.log('blog post not updated: ',  posts.filter(post => post._id === Number(id))[0]);
+        posts.filter(post => post._id === Number(id))[0].title = content.title;
+        posts.filter(post => post._id === Number(id))[0].body = content.body;
+        console.log('blog post updated: ',  posts.filter(post => post._id === Number(id))[0]);
     }
 };
 

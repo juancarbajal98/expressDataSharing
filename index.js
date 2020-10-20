@@ -1,13 +1,32 @@
 // going to be creating a basic blog posting website
 
 // express config
-const express = require('express');
-const path = require('path');
-const app = express();
-const port = 3000;
+    var express = require('express');
+    var bodyParser = require('body-parser');
+    const path = require('path');
+    const app = express();
+    const port = 3000;
+    const session = require('express-session')
 
-// import Posts
-const Post = require('./public/models/posts');
+// access form data on server side
+    app.use(bodyParser.urlencoded({extended: false}));
+    app.use(bodyParser.json());
+// Posts imports
+    const Post = require('./public/models/posts');
+    // notice no need to import specific file only middleware direc
+    const { isAuthor } = require('./public/middleware')
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+  }));
+app.use((req, res, next) => {
+    if (req.session.error) {
+            res.locals.error = req.session.error
+            delete req.session.error
+    }
+    next()
+ })
 
 // set EJS as templating engine 
 /*
@@ -63,5 +82,12 @@ app.get('/', (req,res) => {
     app.get('/app/posts/:id', (req,res) => {
         const post = Post.findById(req.params.id);
         res.render('app/postById', {post});
+    });
+
+    // rendering a post to edit 
+    // first goes through middleware that compares id's 
+    app.get('/app/posts/:id/edit',isAuthor, (req, res) => {
+        console.log(req.body.title);
+        res.render('app/postEdit');
     })
 app.listen(port, () => console.log(`Example app listening on port ${port}`));
