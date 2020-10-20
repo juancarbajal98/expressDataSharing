@@ -1,0 +1,7 @@
+General useful sites:
+    - https://www.geeksforgeeks.org/use-ejs-as-template-engine-in-node-js/#:~:text=EJS%3A%20EJS%20or%20Embedded%20Javascript,and%20produce%20the%20final%20HTML.
+    - https://www.digitalocean.com/community/tutorials/how-to-use-ejs-to-template-your-node-application
+    
+#1. Figuring out how to change ejs default 'view' path
+    - had to make use of the .set() method of the express object
+    - https://stackoverflow.com/questions/21885377/change-express-view-folder-based-on-where-is-the-file-that-res-render-is-calle
